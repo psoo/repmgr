@@ -47,18 +47,18 @@ parse_config(const char* config_file, t_configuration_options* options)
 		 */
 		switch(errno)
 		{
-			case EACCES:
-			{
-				fprintf(stderr, _("Permission to configuration file '%s' denied\n"), config_file);
-				break;
-			}
-			case ENOENT:
-			{
-				fprintf(stderr, _("Did not find the configuration file '%s', continuing\n"), config_file);
-				break;
-			}
-			default:
-				fprintf(stderr, _("Cannot open the configuration file '%s', continuing\n"), config_file);
+		case EACCES:
+		{
+			fprintf(stderr, _("Permission to configuration file '%s' denied\n"), config_file);
+			break;
+		}
+		case ENOENT:
+		{
+			fprintf(stderr, _("Did not find the configuration file '%s', continuing\n"), config_file);
+			break;
+		}
+		default:
+			fprintf(stderr, _("Cannot open the configuration file '%s', continuing\n"), config_file);
 		}
 		return;
 	}
