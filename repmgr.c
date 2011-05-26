@@ -1386,13 +1386,13 @@ create_recovery_file(const char *data_dir, char *master_conninfo)
 	if (runtime_options.username[0])
 	{
 		maxlen_snprintf(line, "primary_conninfo = 'host=%s port=%s user=%s'\n", runtime_options.host,
-						(runtime_options.masterport[0]) ? runtime_options.masterport : "5432",
-						runtime_options.username);
+		                (runtime_options.masterport[0]) ? runtime_options.masterport : "5432",
+		                runtime_options.username);
 	}
 	else
 	{
 		maxlen_snprintf(line, "primary_conninfo = 'host=%s port=%s'\n", runtime_options.host,
-						(runtime_options.masterport[0]) ? runtime_options.masterport : "5432");
+		                (runtime_options.masterport[0]) ? runtime_options.masterport : "5432");
 	}
 
 	/*
