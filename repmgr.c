@@ -1379,8 +1379,21 @@ create_recovery_file(const char *data_dir, char *master_conninfo)
 		return false;
 	}
 
-	maxlen_snprintf(line, "primary_conninfo = 'host=%s port=%s'\n", runtime_options.host,
-	                (runtime_options.masterport[0]) ? runtime_options.masterport : "5432");
+	/*
+	 * When providing a username to connect to the primary, we need to issue the username
+	 * in the primary_conninfo as well.
+	 */
+	if (runtime_options.username[0])
+	{
+		maxlen_snprintf(line, "primary_conninfo = 'host=%s port=%s user=%s'\n", runtime_options.host,
+						(runtime_options.masterport[0]) ? runtime_options.masterport : "5432",
+						runtime_options.username);
+	}
+	else
+	{
+		maxlen_snprintf(line, "primary_conninfo = 'host=%s port=%s'\n", runtime_options.host,
+						(runtime_options.masterport[0]) ? runtime_options.masterport : "5432");
+	}
 
 	/*
 	 * Template a password into the connection string in recovery.conf
